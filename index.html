@@ -7,75 +7,102 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #e8f5e9 0%, #e0f2f1 100%); color: #1e293b; scroll-behavior: smooth; }
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 1.5rem; }
+        body { font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif; background: #f4f6f9; color: #2c3e50; scroll-behavior: smooth; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
         
-        header { background: linear-gradient(135deg, #0a2a3a 0%, #0d3d4f 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        /* Colores corporativos Grupo Chuman */
+        :root {
+            --azul-corp: #0d2b4e;
+            --rojo-corp: #b22234;
+            --amarillo-corp: #f4c430;
+            --gris-oscuro: #34495e;
+            --gris-claro: #ecf0f1;
+            --texto: #2c3e50;
+        }
+        
+        /* Header */
+        header { background: var(--azul-corp); padding: 0.75rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
         .header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .logo { display: flex; align-items: center; gap: 15px; }
-        .logo img { height: 60px; width: auto; }
-        .logo h1 { font-size: 1.6rem; font-weight: 800; color: white; }
-        .logo h1 span { color: #2dd4bf; }
-        .logo p { font-size: 0.65rem; opacity: 0.9; color: #cbd5e1; }
+        .logo img { height: 52px; width: auto; display: block; }
         
-        .nav-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; align-items: center; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: 0.2s; }
-        .nav-links a:hover { color: #2dd4bf; }
+        /* Navegación */
+        .nav-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: 0.2s; font-size: 0.9rem; letter-spacing: 0.3px; }
+        .nav-links a:hover { color: var(--amarillo-corp); }
         
-        /* DROPDOWN */
+        /* Dropdown */
         .dropdown { position: relative; display: inline-block; }
-        .dropdown-btn { background: none; border: none; color: white; font-weight: 500; cursor: pointer; padding: 0.5rem 0; font-size: 1rem; }
-        .dropdown-btn:hover { color: #2dd4bf; }
-        .dropdown-content { display: none; position: absolute; background: #0d3d4f; min-width: 280px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1001; border-radius: 12px; margin-top: 0.5rem; }
-        .dropdown-content a { color: white; padding: 12px 16px; text-decoration: none; display: block; font-size: 0.9rem; border-radius: 12px; cursor: pointer; }
-        .dropdown-content a:hover { background: #2dd4bf; color: #0a2a3a; }
+        .dropdown-btn { background: none; border: none; color: white; font-weight: 500; cursor: pointer; padding: 0.5rem 0; font-size: 0.9rem; font-family: inherit; letter-spacing: 0.3px; }
+        .dropdown-btn:hover { color: var(--amarillo-corp); }
+        .dropdown-content { display: none; position: absolute; background: white; min-width: 250px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); z-index: 1001; border-radius: 6px; margin-top: 0.5rem; border: 1px solid var(--gris-claro); overflow: hidden; }
+        .dropdown-content a { color: var(--azul-corp); padding: 10px 16px; text-decoration: none; display: block; font-size: 0.85rem; border-bottom: 1px solid #edf2f7; transition: 0.2s; }
+        .dropdown-content a:last-child { border-bottom: none; }
+        .dropdown-content a:hover { background: var(--gris-claro); color: var(--rojo-corp); padding-left: 22px; }
         .dropdown.show .dropdown-content { display: block; }
         
-        .btn-whatsapp-header { background: #25D366; padding: 0.5rem 1.2rem; border-radius: 40px; color: white; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+        /* Botón WhatsApp */
+        .btn-whatsapp-header { background: #25D366; padding: 0.45rem 1.2rem; border-radius: 4px; color: white; text-decoration: none; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
+        .btn-whatsapp-header:hover { background: #128C7E; }
         
-        .hero { background: linear-gradient(135deg, #0a2a3a 0%, #0d3d4f 50%, #0d9488 100%); padding: 3rem 0; text-align: center; position: relative; overflow: hidden; }
-        .hero::before { content: "🏆"; position: absolute; font-size: 15rem; opacity: 0.05; bottom: -50px; right: -50px; transform: rotate(-15deg); }
-        .hero h1 { font-size: 3rem; color: white; }
-        .hero h1 span { color: #2dd4bf; animation: pulse 2s infinite; display: inline-block; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        .hero .slogan { font-size: 1.5rem; color: #2dd4bf; margin: 0.5rem 0; font-weight: bold; }
-        .hero p { font-size: 1.1rem; margin: 1rem 0; color: #e0f2fe; }
-        .btn-primary { background: #2dd4bf; color: #0a2a3a; padding: 0.8rem 2rem; border-radius: 40px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 1rem; }
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, var(--azul-corp) 0%, var(--rojo-corp) 100%); padding: 3rem 0; text-align: center; }
+        .hero h1 { font-size: 2.2rem; color: white; font-weight: 600; letter-spacing: -0.3px; }
+        .hero h1 span { color: var(--amarillo-corp); }
+        .hero p { font-size: 1rem; margin: 1rem 0; color: #e0e0e0; line-height: 1.5; }
+        .btn-primary { background: var(--amarillo-corp); color: var(--azul-corp); padding: 0.7rem 2rem; border-radius: 4px; text-decoration: none; font-weight: 700; display: inline-block; margin-top: 0.5rem; transition: 0.2s; border: none; cursor: pointer; font-size: 0.9rem; }
+        .btn-primary:hover { background: #e0b020; transform: translateY(-2px); }
         
+        /* Secciones */
+        .section { padding: 3rem 0; border-bottom: 1px solid var(--gris-claro); }
+        .section-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; border-left: 4px solid var(--rojo-corp); padding-left: 1rem; color: var(--azul-corp); display: inline-block; }
+        
+        /* Grid Categorías */
         .categorias-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-        .categoria-card { background: white; border-radius: 20px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        .categoria-card:hover { transform: translateY(-6px); box-shadow: 0 12px 25px rgba(13, 148, 136, 0.2); border-color: #2dd4bf; }
-        .categoria-icono { font-size: 3rem; margin-bottom: 1rem; }
-        .categoria-card h3 { color: #0a2a3a; margin-bottom: 0.5rem; }
-        .categoria-card p { color: #64748b; font-size: 0.9rem; }
+        .categoria-card { background: white; border-radius: 8px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid var(--gris-claro); }
+        .categoria-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-color: var(--rojo-corp); }
+        .categoria-icono { font-size: 2rem; margin-bottom: 1rem; color: var(--rojo-corp); }
+        .categoria-card h3 { color: var(--azul-corp); margin-bottom: 0.5rem; font-size: 1rem; font-weight: 600; }
+        .categoria-card p { color: #7f8c8d; font-size: 0.8rem; }
         
-        .kits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1.5rem; }
-        .kit-card { background: white; border-radius: 24px; padding: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-top: 4px solid #facc15; }
-        .kit-card h3 { font-size: 1.6rem; color: #facc15; }
+        /* Kits */
+        .kits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 1.5rem; }
+        .kit-card { background: white; border-radius: 8px; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid var(--gris-claro); border-top: 3px solid var(--amarillo-corp); }
+        .kit-card h3 { font-size: 1.2rem; color: var(--azul-corp); margin-bottom: 1rem; font-weight: 600; }
         .kit-card ul { margin: 1rem 0; padding-left: 1.2rem; }
-        .kit-price { font-size: 1.5rem; font-weight: 800; color: #0d9488; margin: 1rem 0; }
-        .btn-buy { background: #25D366; color: white; border: none; padding: 0.6rem 1rem; border-radius: 40px; font-weight: 600; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+        .kit-card li { margin: 0.5rem 0; color: #5a6e7c; font-size: 0.85rem; }
+        .kit-price { font-size: 1.2rem; font-weight: 700; color: var(--rojo-corp); margin: 1rem 0; }
+        .btn-buy { background: #25D366; color: white; border: none; padding: 0.6rem; border-radius: 4px; font-weight: 600; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; transition: 0.2s; font-size: 0.85rem; }
+        .btn-buy:hover { background: #128C7E; }
         
-        .benefits-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
-        .benefit { text-align: center; flex: 1; min-width: 180px; background: white; padding: 1.5rem; border-radius: 20px; }
-        .benefit i { font-size: 2rem; background: linear-gradient(135deg, #0a2a3a, #0d9488); color: #2dd4bf; padding: 1rem; border-radius: 60px; }
+        /* Beneficios */
+        .benefits-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; }
+        .benefit { text-align: center; flex: 1; min-width: 180px; background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--gris-claro); transition: 0.2s; }
+        .benefit:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .benefit i { font-size: 1.6rem; background: var(--azul-corp); color: var(--amarillo-corp); padding: 0.8rem; border-radius: 50%; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; }
+        .benefit h3 { margin-top: 0.8rem; font-size: 0.95rem; color: var(--azul-corp); font-weight: 600; }
+        .benefit p { font-size: 0.75rem; color: #7f8c8d; margin-top: 0.3rem; }
         
+        /* Contacto */
         .contact-grid { display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem; }
-        .contact-info, .contact-form { flex: 1; background: white; padding: 1.5rem; border-radius: 24px; }
-        .contact-info p { margin: 0.8rem 0; display: flex; align-items: center; gap: 0.8rem; }
-        .contact-info i { width: 30px; color: #0d9488; }
-        input, textarea { width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #cbd5e1; border-radius: 60px; }
-        button[type="submit"] { background: linear-gradient(135deg, #0d9488, #2dd4bf); color: white; width: 100%; padding: 0.8rem; border: none; border-radius: 60px; font-weight: bold; cursor: pointer; }
+        .contact-info, .contact-form { flex: 1; background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--gris-claro); }
+        .contact-info h3, .contact-form h3 { color: var(--azul-corp); margin-bottom: 1rem; font-size: 1.1rem; font-weight: 600; }
+        .contact-info p { margin: 0.7rem 0; display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; color: #5a6e7c; }
+        .contact-info i { width: 28px; color: var(--rojo-corp); font-size: 0.9rem; }
+        .contact-info a { color: var(--azul-corp); text-decoration: none; }
+        .contact-info a:hover { color: var(--rojo-corp); }
         
-        footer { background: linear-gradient(135deg, #0a2a3a, #06171f); color: #cbd5e1; text-align: center; padding: 2rem; }
-        footer a { color: #2dd4bf; text-decoration: none; }
+        input, textarea { width: 100%; padding: 0.7rem; margin-bottom: 1rem; border: 1px solid var(--gris-claro); border-radius: 4px; font-family: inherit; font-size: 0.85rem; background: white; }
+        input:focus, textarea:focus { outline: none; border-color: var(--rojo-corp); }
+        button[type="submit"] { background: var(--rojo-corp); color: white; width: 100%; padding: 0.7rem; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+        button[type="submit"]:hover { background: var(--azul-corp); }
         
-        .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25D366; color: white; padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: bold; z-index: 99; }
+        footer { background: var(--azul-corp); color: #a0b4c8; text-align: center; padding: 1.5rem; font-size: 0.75rem; }
+        footer a { color: var(--amarillo-corp); text-decoration: none; }
         
-        .section { padding: 3rem 0; border-bottom: 1px solid rgba(13, 148, 136, 0.2); }
-        .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; border-left: 6px solid #2dd4bf; padding-left: 1rem; color: #0a2a3a; display: inline-block; }
+        .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25D366; color: white; padding: 10px 18px; border-radius: 40px; display: flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; font-size: 0.85rem; z-index: 99; box-shadow: 0 2px 10px rgba(0,0,0,0.2); transition: 0.2s; }
+        .whatsapp-float:hover { transform: scale(1.02); background: #128C7E; }
         
-        @media (max-width: 768px) { .header-flex { flex-direction: column; } .hero h1 { font-size: 2rem; } .dropdown-content { position: fixed; top: auto; left: 0; right: 0; margin: 0.5rem; width: calc(100% - 1rem); } }
+        @media (max-width: 768px) { .header-flex { flex-direction: column; } .hero h1 { font-size: 1.6rem; } .container { padding: 0 1rem; } .section { padding: 2rem 0; } }
     </style>
 </head>
 <body>
@@ -83,28 +110,24 @@
     <header>
         <div class="container header-flex">
             <div class="logo">
-                <img src="Logochuman.png" alt="Grupo Chuman Logo" onerror="this.style.display='none'">
-                <div>
-                    <h1>Grupo <span>Chuman</span></h1>
-                    <p>PRODUCTOS QUÍMICOS • MANTENIMIENTO • LOGÍSTICA</p>
-                </div>
+                <img src="Logochuman.png" alt="Grupo Chuman">
             </div>
             <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="index.html">Inicio</a></li>
                 <li class="dropdown" id="dropdownProductos">
                     <button class="dropdown-btn" id="btnProductos">Productos <i class="fas fa-chevron-down"></i></button>
-                    <div class="dropdown-content" id="dropdownMenu">
-                        <a href="categorias/ceras.html">✨ CERAS Y ABRILLANTADORES</a>
-                        <a href="categorias/desengrasantes.html">💧 DESENGRASANTES Y DECAPANTES</a>
-                        <a href="categorias/lavanderia.html">🧺 AUXILIARES DE LAVANDERIA</a>
-                        <a href="categorias/desinfectantes.html">🦠 DESINFECTANTES</a>
-                        <a href="categorias/perfumadores.html">🌸 PERFUMADORES</a>
-                        <a href="categorias/limpiadores.html">🧼 LIMPIADORES</a>
-                        <a href="categorias/accesorios.html">🔧 ACCESORIOS Y OTROS</a>
+                    <div class="dropdown-content">
+                        <a href="ceras.html">Ceras y Abrillantadores</a>
+                        <a href="desengrasantes.html">Desengrasantes y Decapantes</a>
+                        <a href="lavanderia.html">Auxiliares de Lavandería</a>
+                        <a href="desinfectantes.html">Desinfectantes</a>
+                        <a href="perfumadores.html">Perfumadores</a>
+                        <a href="limpiadores.html">Limpiadores</a>
+                        <a href="accesorios.html">Accesorios y Otros</a>
                     </div>
                 </li>
-                <li><a href="#kits">🎁 Ofertas</a></li>
-                <li><a href="#contacto">📞 Contacto</a></li>
+                <li><a href="#kits">Ofertas</a></li>
+                <li><a href="#contacto">Contacto</a></li>
             </ul>
             <a href="https://wa.me/51948833556?text=Hola%20Grupo%20Chuman%2C%20quiero%20hacer%20un%20pedido" class="btn-whatsapp-header" target="_blank"><i class="fab fa-whatsapp"></i> Pedir ahora</a>
         </div>
@@ -112,52 +135,50 @@
 
     <section id="inicio" class="hero">
         <div class="container">
-            <h1>🏆 <span>¡Somos los campeones!</span> 🏆</h1>
-            <div class="slogan">grupo chuman</div>
-            <p><strong>PRODUCTOS QUÍMICOS, MANTENIMIENTO Y LOGÍSTICA</strong></p>
+            <h1>¡Somos <span>los campeones!</span></h1>
             <p>Más de 10 años de experiencia | Calidad y precio directo de fábrica</p>
             <p><strong>Ing. Gary Jason Chumán Becerra</strong> - Planta y oficina en Trujillo</p>
-            <a href="#categorias-destacadas" class="btn-primary">Ver categorías →</a>
+            <a href="#categorias" class="btn-primary">Ver categorías</a>
         </div>
     </section>
 
-    <!-- Categorías destacadas en la página principal -->
-    <section id="categorias-destacadas" class="section">
+    <!-- Categorías -->
+    <section id="categorias" class="section">
         <div class="container">
-            <h2 class="section-title">📦 Nuestras categorías</h2>
+            <h2 class="section-title">Nuestras categorías</h2>
             <div class="categorias-grid">
-                <div class="categoria-card" onclick="location.href='categorias/ceras.html'">
-                    <div class="categoria-icono">✨</div>
+                <div class="categoria-card" onclick="location.href='ceras.html'">
+                    <div class="categoria-icono"><i class="fas fa-tint"></i></div>
                     <h3>Ceras y Abrillantadores</h3>
-                    <p>Cerás, siliconas, renovadores y más</p>
+                    <p>Cerás, siliconas, renovadores</p>
                 </div>
-                <div class="categoria-card" onclick="location.href='categorias/desengrasantes.html'">
-                    <div class="categoria-icono">💧</div>
+                <div class="categoria-card" onclick="location.href='desengrasantes.html'">
+                    <div class="categoria-icono"><i class="fas fa-oil-can"></i></div>
                     <h3>Desengrasantes y Decapantes</h3>
-                    <p>Desengrasantes, quitasarros, desatoradores</p>
+                    <p>Desengrasantes, quitasarros</p>
                 </div>
-                <div class="categoria-card" onclick="location.href='categorias/lavanderia.html'">
-                    <div class="categoria-icono">🧺</div>
+                <div class="categoria-card" onclick="location.href='lavanderia.html'">
+                    <div class="categoria-icono"><i class="fas fa-tshirt"></i></div>
                     <h3>Auxiliares de Lavandería</h3>
-                    <p>Shampoos, suavizantes y más</p>
+                    <p>Shampoos, suavizantes</p>
                 </div>
-                <div class="categoria-card" onclick="location.href='categorias/desinfectantes.html'">
-                    <div class="categoria-icono">🦠</div>
+                <div class="categoria-card" onclick="location.href='desinfectantes.html'">
+                    <div class="categoria-icono"><i class="fas fa-shield-alt"></i></div>
                     <h3>Desinfectantes</h3>
-                    <p>Alcohol en gel, lejía, desinfectantes ecológicos</p>
+                    <p>Alcohol en gel, lejía, desinfectantes</p>
                 </div>
-                <div class="categoria-card" onclick="location.href='categorias/perfumadores.html'">
-                    <div class="categoria-icono">🌸</div>
+                <div class="categoria-card" onclick="location.href='perfumadores.html'">
+                    <div class="categoria-icono"><i class="fas fa-leaf"></i></div>
                     <h3>Perfumadores</h3>
                     <p>Perfumadores líquidos y pastillas</p>
                 </div>
-                <div class="categoria-card" onclick="location.href='categorias/limpiadores.html'">
-                    <div class="categoria-icono">🧼</div>
+                <div class="categoria-card" onclick="location.href='limpiadores.html'">
+                    <div class="categoria-icono"><i class="fas fa-broom"></i></div>
                     <h3>Limpiadores</h3>
                     <p>Jabones, limpiavidrios, shampoos</p>
                 </div>
-                <div class="categoria-card" onclick="location.href='categorias/accesorios.html'">
-                    <div class="categoria-icono">🔧</div>
+                <div class="categoria-card" onclick="location.href='accesorios.html'">
+                    <div class="categoria-icono"><i class="fas fa-tools"></i></div>
                     <h3>Accesorios y Otros</h3>
                     <p>Pulverizadores, dispensadores</p>
                 </div>
@@ -165,59 +186,63 @@
         </div>
     </section>
 
+    <!-- Kits de oferta -->
     <section id="kits" class="section">
         <div class="container">
-            <h2 class="section-title">🎁 Kits de oferta especial</h2>
+            <h2 class="section-title">Kits de oferta especial</h2>
             <div class="kits-grid">
                 <div class="kit-card">
-                    <h3>KIT N° 1</h3>
+                    <h3>Kit N° 1</h3>
                     <ul>
-                        <li>✓ 01 litro de quitasarro enérgico</li>
-                        <li>✓ 01 litro de cera al agua perfumada o limpiavidrios</li>
-                        <li>✓ 01 litro de desinfectante ecológico</li>
-                        <li>✓ ½ litro de desengrasante o gel lavavajillas o perfumador o shampoó</li>
-                        <li>✓ 01 pastilla perfumada</li>
+                        <li>01 litro de quitasarro enérgico</li>
+                        <li>01 litro de cera al agua perfumada o limpiavidrios</li>
+                        <li>01 litro de desinfectante ecológico</li>
+                        <li>½ litro de desengrasante o gel lavavajillas o perfumador o shampoó</li>
+                        <li>01 pastilla perfumada</li>
                     </ul>
-                    <div class="kit-price">💰 Precio oferta: S/ 32.00</div>
+                    <div class="kit-price">Precio oferta: S/ 32.00</div>
                     <a href="https://wa.me/51948833556?text=Quiero%20el%20KIT%20N°1%20de%20Grupo%20Chuman%20(S/.32.00)" target="_blank" class="btn-buy"><i class="fab fa-whatsapp"></i> Comprar Kit 1</a>
                 </div>
                 <div class="kit-card">
-                    <h3>KIT N° 2</h3>
+                    <h3>Kit N° 2</h3>
                     <ul>
-                        <li>✓ 01 litro de quitasarro enérgico</li>
-                        <li>✓ 01 litro de cera al agua perfumada o limpiavidrios</li>
-                        <li>✓ 01 litro de desinfectante ecológico</li>
-                        <li>✓ ½ litro de jabón líquido con dispensador o ¼ litro de silicona/renovador o ¼ alcohol en gel</li>
-                        <li>✓ 01 pastilla perfumada</li>
+                        <li>01 litro de quitasarro enérgico</li>
+                        <li>01 litro de cera al agua perfumada o limpiavidrios</li>
+                        <li>01 litro de desinfectante ecológico</li>
+                        <li>½ litro de jabón líquido con dispensador o ¼ litro de silicona/renovador o ¼ alcohol en gel</li>
+                        <li>01 pastilla perfumada</li>
                     </ul>
-                    <div class="kit-price">💰 Precio oferta: S/ 35.00</div>
+                    <div class="kit-price">Precio oferta: S/ 35.00</div>
                     <a href="https://wa.me/51948833556?text=Quiero%20el%20KIT%20N°2%20de%20Grupo%20Chuman%20(S/.35.00)" target="_blank" class="btn-buy"><i class="fab fa-whatsapp"></i> Comprar Kit 2</a>
+                    <p style="font-size: 0.7rem; margin-top: 0.5rem; color: var(--rojo-corp);">* Incremento S/ 3.00 por cambiar desinfectante ecológico por gel.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" style="background: rgba(13, 148, 136, 0.05);">
+    <!-- Beneficios -->
+    <section class="section" style="background: #f8fafc;">
         <div class="container">
-            <h2 class="section-title">✨ ¿Por qué Grupo Chuman?</h2>
+            <h2 class="section-title">¿Por qué Grupo Chuman?</h2>
             <div class="benefits-grid">
-                <div class="benefit"><i class="fas fa-truck-fast"></i><h3>Envíos a domicilio</h3><p>Entregas en Trujillo y todo el Perú</p></div>
-                <div class="benefit"><i class="fas fa-dollar-sign"></i><h3>Mejor precio</h3><p>Directo de fábrica</p></div>
-                <div class="benefit"><i class="fas fa-leaf"></i><h3>Productos eco</h3><p>Biodegradables</p></div>
+                <div class="benefit"><i class="fas fa-truck"></i><h3>Envíos a domicilio</h3><p>Entregas en Trujillo y todo el Perú</p></div>
+                <div class="benefit"><i class="fas fa-tag"></i><h3>Mejor precio</h3><p>Directo de fábrica</p></div>
+                <div class="benefit"><i class="fas fa-recycle"></i><h3>Productos eco</h3><p>Biodegradables</p></div>
                 <div class="benefit"><i class="fas fa-headset"></i><h3>Atención personalizada</h3><p>WhatsApp 948833556</p></div>
             </div>
         </div>
     </section>
 
+    <!-- Contacto -->
     <section id="contacto" class="section">
         <div class="container">
-            <h2 class="section-title">📞 Información de contacto</h2>
+            <h2 class="section-title">Información de contacto</h2>
             <div class="contact-grid">
                 <div class="contact-info">
                     <h3>Grupo Chuman</h3>
                     <p><i class="fas fa-user-tie"></i> <strong>Ing. Gary Jason Chumán Becerra</strong></p>
                     <p><i class="fas fa-map-marker-alt"></i> <strong>Planta:</strong> Calle Sucre 26-A, Los Héroes, Laredo - Trujillo</p>
-                    <p><i class="fas fa-map-pin"></i> <strong>Oficina:</strong> Jr. Borgoño 168, Urb. El Molino, Trujillo</p>
+                    <p><i class="fas fa-building"></i> <strong>Oficina:</strong> Jr. Borgoño 168, Urb. El Molino, Trujillo</p>
                     <p><i class="fas fa-phone-alt"></i> <strong>Teléfono:</strong> (044) 773792</p>
                     <p><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong> <a href="https://wa.me/51948833556" target="_blank">948 833 556</a></p>
                     <p><i class="fas fa-envelope"></i> <strong>Email:</strong> grupo.chuman@hotmail.com</p>
@@ -238,13 +263,13 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Grupo Chuman - Ing. Gary Jason Chumán Becerra</p>
-            <p>🌟 "Somos los campeones en limpieza profesional" 🌟</p>
+            <p>&copy; 2025 Grupo Chuman - Ing. Gary Jason Chumán Becerra | Todos los derechos reservados</p>
+            <p>Productos Químicos · Mantenimiento · Logística</p>
         </div>
     </footer>
 
     <a href="https://wa.me/51948833556?text=Hola%20Grupo%20Chuman%2C%20quisiera%20información" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp fa-2x"></i> <span>¡Escríbenos!</span>
+        <i class="fab fa-whatsapp"></i> <span>¡Escríbenos!</span>
     </a>
 
     <script>
@@ -252,17 +277,19 @@
         const dropdown = document.getElementById('dropdownProductos');
         const btnProductos = document.getElementById('btnProductos');
         
-        btnProductos.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            dropdown.classList.toggle('show');
-        });
-        
-        document.addEventListener('click', function(e) {
-            if (!dropdown.contains(e.target)) {
-                dropdown.classList.remove('show');
-            }
-        });
+        if (dropdown && btnProductos) {
+            btnProductos.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                dropdown.classList.toggle('show');
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        }
 
         // Formulario de contacto
         document.getElementById('contactForm')?.addEventListener('submit', function(e) {
@@ -270,9 +297,17 @@
             const nombre = this.querySelector('input[placeholder="Tu nombre"]').value;
             const telefono = this.querySelector('input[placeholder="Tu WhatsApp"]').value;
             const mensaje = this.querySelector('textarea').value;
-            const texto = `Hola%20Grupo%20Chuman%2C%20soy%20${encodeURIComponent(nombre)}.%20Mi%20WhatsApp%20es%20${encodeURIComponent(telefono)}.%20${encodeURIComponent(mensaje)}`;
-            window.open(`https://wa.me/51948833556?text=${texto}`, '_blank');
+            if (nombre && telefono) {
+                const texto = `Hola%20Grupo%20Chuman%2C%20soy%20${encodeURIComponent(nombre)}.%20Mi%20WhatsApp%20es%20${encodeURIComponent(telefono)}.%20${encodeURIComponent(mensaje)}`;
+                window.open(`https://wa.me/51948833556?text=${texto}`, '_blank');
+            } else {
+                alert('Por favor, complete su nombre y número de WhatsApp.');
+            }
         });
+        
+        function pedirProducto(nombre) {
+            window.open(`https://wa.me/51948833556?text=Hola%20Grupo%20Chuman%2C%20quiero%20información%20sobre%20${encodeURIComponent(nombre)}`, '_blank');
+        }
     </script>
 </body>
 </html>
