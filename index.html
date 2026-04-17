@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Grupo Chuman | Productos de limpieza profesionales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #e8f5e9 0%, #e0f2f1 100%); color: #1e293b; scroll-behavior: smooth; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 1.5rem; }
+        
+        header { background: linear-gradient(135deg, #0a2a3a 0%, #0d3d4f 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { display: flex; align-items: center; gap: 15px; }
+        .logo img { height: 60px; width: auto; }
+        .logo h1 { font-size: 1.6rem; font-weight: 800; color: white; }
+        .logo h1 span { color: #2dd4bf; }
+        .logo p { font-size: 0.65rem; opacity: 0.9; color: #cbd5e1; }
+        
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: 0.2s; }
+        .nav-links a:hover { color: #2dd4bf; }
+        
+        /* DROPDOWN */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-btn { background: none; border: none; color: white; font-weight: 500; cursor: pointer; padding: 0.5rem 0; font-size: 1rem; }
+        .dropdown-btn:hover { color: #2dd4bf; }
+        .dropdown-content { display: none; position: absolute; background: #0d3d4f; min-width: 280px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1001; border-radius: 12px; margin-top: 0.5rem; }
+        .dropdown-content a { color: white; padding: 12px 16px; text-decoration: none; display: block; font-size: 0.9rem; border-radius: 12px; cursor: pointer; }
+        .dropdown-content a:hover { background: #2dd4bf; color: #0a2a3a; }
+        .dropdown.show .dropdown-content { display: block; }
+        
+        .btn-whatsapp-header { background: #25D366; padding: 0.5rem 1.2rem; border-radius: 40px; color: white; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+        
+        .hero { background: linear-gradient(135deg, #0a2a3a 0%, #0d3d4f 50%, #0d9488 100%); padding: 3rem 0; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: "🏆"; position: absolute; font-size: 15rem; opacity: 0.05; bottom: -50px; right: -50px; transform: rotate(-15deg); }
+        .hero h1 { font-size: 3rem; color: white; }
+        .hero h1 span { color: #2dd4bf; animation: pulse 2s infinite; display: inline-block; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .hero .slogan { font-size: 1.5rem; color: #2dd4bf; margin: 0.5rem 0; font-weight: bold; }
+        .hero p { font-size: 1.1rem; margin: 1rem 0; color: #e0f2fe; }
+        .btn-primary { background: #2dd4bf; color: #0a2a3a; padding: 0.8rem 2rem; border-radius: 40px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 1rem; }
+        
+        .categorias-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .categoria-card { background: white; border-radius: 20px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .categoria-card:hover { transform: translateY(-6px); box-shadow: 0 12px 25px rgba(13, 148, 136, 0.2); border-color: #2dd4bf; }
+        .categoria-icono { font-size: 3rem; margin-bottom: 1rem; }
+        .categoria-card h3 { color: #0a2a3a; margin-bottom: 0.5rem; }
+        .categoria-card p { color: #64748b; font-size: 0.9rem; }
+        
+        .kits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1.5rem; }
+        .kit-card { background: white; border-radius: 24px; padding: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-top: 4px solid #facc15; }
+        .kit-card h3 { font-size: 1.6rem; color: #facc15; }
+        .kit-card ul { margin: 1rem 0; padding-left: 1.2rem; }
+        .kit-price { font-size: 1.5rem; font-weight: 800; color: #0d9488; margin: 1rem 0; }
+        .btn-buy { background: #25D366; color: white; border: none; padding: 0.6rem 1rem; border-radius: 40px; font-weight: 600; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+        
+        .benefits-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
+        .benefit { text-align: center; flex: 1; min-width: 180px; background: white; padding: 1.5rem; border-radius: 20px; }
+        .benefit i { font-size: 2rem; background: linear-gradient(135deg, #0a2a3a, #0d9488); color: #2dd4bf; padding: 1rem; border-radius: 60px; }
+        
+        .contact-grid { display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem; }
+        .contact-info, .contact-form { flex: 1; background: white; padding: 1.5rem; border-radius: 24px; }
+        .contact-info p { margin: 0.8rem 0; display: flex; align-items: center; gap: 0.8rem; }
+        .contact-info i { width: 30px; color: #0d9488; }
+        input, textarea { width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #cbd5e1; border-radius: 60px; }
+        button[type="submit"] { background: linear-gradient(135deg, #0d9488, #2dd4bf); color: white; width: 100%; padding: 0.8rem; border: none; border-radius: 60px; font-weight: bold; cursor: pointer; }
+        
+        footer { background: linear-gradient(135deg, #0a2a3a, #06171f); color: #cbd5e1; text-align: center; padding: 2rem; }
+        footer a { color: #2dd4bf; text-decoration: none; }
+        
+        .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25D366; color: white; padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: bold; z-index: 99; }
+        
+        .section { padding: 3rem 0; border-bottom: 1px solid rgba(13, 148, 136, 0.2); }
+        .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; border-left: 6px solid #2dd4bf; padding-left: 1rem; color: #0a2a3a; display: inline-block; }
+        
+        @media (max-width: 768px) { .header-flex { flex-direction: column; } .hero h1 { font-size: 2rem; } .dropdown-content { position: fixed; top: auto; left: 0; right: 0; margin: 0.5rem; width: calc(100% - 1rem); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-flex">
+            <div class="logo">
+                <img src="Logochuman.png" alt="Grupo Chuman Logo" onerror="this.style.display='none'">
+                <div>
+                    <h1>Grupo <span>Chuman</span></h1>
+                    <p>PRODUCTOS QUÍMICOS • MANTENIMIENTO • LOGÍSTICA</p>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li class="dropdown" id="dropdownProductos">
+                    <button class="dropdown-btn" id="btnProductos">Productos <i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content" id="dropdownMenu">
+                        <a href="categorias/ceras.html">✨ CERAS Y ABRILLANTADORES</a>
+                        <a href="categorias/desengrasantes.html">💧 DESENGRASANTES Y DECAPANTES</a>
+                        <a href="categorias/lavanderia.html">🧺 AUXILIARES DE LAVANDERIA</a>
+                        <a href="categorias/desinfectantes.html">🦠 DESINFECTANTES</a>
+                        <a href="categorias/perfumadores.html">🌸 PERFUMADORES</a>
+                        <a href="categorias/limpiadores.html">🧼 LIMPIADORES</a>
+                        <a href="categorias/accesorios.html">🔧 ACCESORIOS Y OTROS</a>
+                    </div>
+                </li>
+                <li><a href="#kits">🎁 Ofertas</a></li>
+                <li><a href="#contacto">📞 Contacto</a></li>
+            </ul>
+            <a href="https://wa.me/51948833556?text=Hola%20Grupo%20Chuman%2C%20quiero%20hacer%20un%20pedido" class="btn-whatsapp-header" target="_blank"><i class="fab fa-whatsapp"></i> Pedir ahora</a>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="container">
+            <h1>🏆 <span>¡Somos los campeones!</span> 🏆</h1>
+            <div class="slogan">grupo chuman</div>
+            <p><strong>PRODUCTOS QUÍMICOS, MANTENIMIENTO Y LOGÍSTICA</strong></p>
+            <p>Más de 10 años de experiencia | Calidad y precio directo de fábrica</p>
+            <p><strong>Ing. Gary Jason Chumán Becerra</strong> - Planta y oficina en Trujillo</p>
+            <a href="#categorias-destacadas" class="btn-primary">Ver categorías →</a>
+        </div>
+    </section>
+
+    <!-- Categorías destacadas en la página principal -->
+    <section id="categorias-destacadas" class="section">
+        <div class="container">
+            <h2 class="section-title">📦 Nuestras categorías</h2>
+            <div class="categorias-grid">
+                <div class="categoria-card" onclick="location.href='categorias/ceras.html'">
+                    <div class="categoria-icono">✨</div>
+                    <h3>Ceras y Abrillantadores</h3>
+                    <p>Cerás, siliconas, renovadores y más</p>
+                </div>
+                <div class="categoria-card" onclick="location.href='categorias/desengrasantes.html'">
+                    <div class="categoria-icono">💧</div>
+                    <h3>Desengrasantes y Decapantes</h3>
+                    <p>Desengrasantes, quitasarros, desatoradores</p>
+                </div>
+                <div class="categoria-card" onclick="location.href='categorias/lavanderia.html'">
+                    <div class="categoria-icono">🧺</div>
+                    <h3>Auxiliares de Lavandería</h3>
+                    <p>Shampoos, suavizantes y más</p>
+                </div>
+                <div class="categoria-card" onclick="location.href='categorias/desinfectantes.html'">
+                    <div class="categoria-icono">🦠</div>
+                    <h3>Desinfectantes</h3>
+                    <p>Alcohol en gel, lejía, desinfectantes ecológicos</p>
+                </div>
+                <div class="categoria-card" onclick="location.href='categorias/perfumadores.html'">
+                    <div class="categoria-icono">🌸</div>
+                    <h3>Perfumadores</h3>
+                    <p>Perfumadores líquidos y pastillas</p>
+                </div>
+                <div class="categoria-card" onclick="location.href='categorias/limpiadores.html'">
+                    <div class="categoria-icono">🧼</div>
+                    <h3>Limpiadores</h3>
+                    <p>Jabones, limpiavidrios, shampoos</p>
+                </div>
+                <div class="categoria-card" onclick="location.href='categorias/accesorios.html'">
+                    <div class="categoria-icono">🔧</div>
+                    <h3>Accesorios y Otros</h3>
+                    <p>Pulverizadores, dispensadores</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kits" class="section">
+        <div class="container">
+            <h2 class="section-title">🎁 Kits de oferta especial</h2>
+            <div class="kits-grid">
+                <div class="kit-card">
+                    <h3>KIT N° 1</h3>
+                    <ul>
+                        <li>✓ 01 litro de quitasarro enérgico</li>
+                        <li>✓ 01 litro de cera al agua perfumada o limpiavidrios</li>
+                        <li>✓ 01 litro de desinfectante ecológico</li>
+                        <li>✓ ½ litro de desengrasante o gel lavavajillas o perfumador o shampoó</li>
+                        <li>✓ 01 pastilla perfumada</li>
+                    </ul>
+                    <div class="kit-price">💰 Precio oferta: S/ 32.00</div>
+                    <a href="https://wa.me/51948833556?text=Quiero%20el%20KIT%20N°1%20de%20Grupo%20Chuman%20(S/.32.00)" target="_blank" class="btn-buy"><i class="fab fa-whatsapp"></i> Comprar Kit 1</a>
+                </div>
+                <div class="kit-card">
+                    <h3>KIT N° 2</h3>
+                    <ul>
+                        <li>✓ 01 litro de quitasarro enérgico</li>
+                        <li>✓ 01 litro de cera al agua perfumada o limpiavidrios</li>
+                        <li>✓ 01 litro de desinfectante ecológico</li>
+                        <li>✓ ½ litro de jabón líquido con dispensador o ¼ litro de silicona/renovador o ¼ alcohol en gel</li>
+                        <li>✓ 01 pastilla perfumada</li>
+                    </ul>
+                    <div class="kit-price">💰 Precio oferta: S/ 35.00</div>
+                    <a href="https://wa.me/51948833556?text=Quiero%20el%20KIT%20N°2%20de%20Grupo%20Chuman%20(S/.35.00)" target="_blank" class="btn-buy"><i class="fab fa-whatsapp"></i> Comprar Kit 2</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: rgba(13, 148, 136, 0.05);">
+        <div class="container">
+            <h2 class="section-title">✨ ¿Por qué Grupo Chuman?</h2>
+            <div class="benefits-grid">
+                <div class="benefit"><i class="fas fa-truck-fast"></i><h3>Envíos a domicilio</h3><p>Entregas en Trujillo y todo el Perú</p></div>
+                <div class="benefit"><i class="fas fa-dollar-sign"></i><h3>Mejor precio</h3><p>Directo de fábrica</p></div>
+                <div class="benefit"><i class="fas fa-leaf"></i><h3>Productos eco</h3><p>Biodegradables</p></div>
+                <div class="benefit"><i class="fas fa-headset"></i><h3>Atención personalizada</h3><p>WhatsApp 948833556</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="section">
+        <div class="container">
+            <h2 class="section-title">📞 Información de contacto</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Grupo Chuman</h3>
+                    <p><i class="fas fa-user-tie"></i> <strong>Ing. Gary Jason Chumán Becerra</strong></p>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Planta:</strong> Calle Sucre 26-A, Los Héroes, Laredo - Trujillo</p>
+                    <p><i class="fas fa-map-pin"></i> <strong>Oficina:</strong> Jr. Borgoño 168, Urb. El Molino, Trujillo</p>
+                    <p><i class="fas fa-phone-alt"></i> <strong>Teléfono:</strong> (044) 773792</p>
+                    <p><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong> <a href="https://wa.me/51948833556" target="_blank">948 833 556</a></p>
+                    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> grupo.chuman@hotmail.com</p>
+                    <p><i class="fas fa-id-card"></i> <strong>RUC:</strong> 10181821359</p>
+                </div>
+                <div class="contact-form">
+                    <h3>Escríbenos directamente</h3>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Tu nombre" required>
+                        <input type="tel" placeholder="Tu WhatsApp" required>
+                        <textarea rows="3" placeholder="¿Qué productos o cotización necesitas?"></textarea>
+                        <button type="submit">Enviar por WhatsApp <i class="fab fa-whatsapp"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Grupo Chuman - Ing. Gary Jason Chumán Becerra</p>
+            <p>🌟 "Somos los campeones en limpieza profesional" 🌟</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/51948833556?text=Hola%20Grupo%20Chuman%2C%20quisiera%20información" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp fa-2x"></i> <span>¡Escríbenos!</span>
+    </a>
+
+    <script>
+        // Menú desplegable
+        const dropdown = document.getElementById('dropdownProductos');
+        const btnProductos = document.getElementById('btnProductos');
+        
+        btnProductos.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropdown.classList.toggle('show');
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Formulario de contacto
+        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nombre = this.querySelector('input[placeholder="Tu nombre"]').value;
+            const telefono = this.querySelector('input[placeholder="Tu WhatsApp"]').value;
+            const mensaje = this.querySelector('textarea').value;
+            const texto = `Hola%20Grupo%20Chuman%2C%20soy%20${encodeURIComponent(nombre)}.%20Mi%20WhatsApp%20es%20${encodeURIComponent(telefono)}.%20${encodeURIComponent(mensaje)}`;
+            window.open(`https://wa.me/51948833556?text=${texto}`, '_blank');
+        });
+    </script>
+</body>
+</html>
